@@ -28,7 +28,6 @@ import static org.junit.Assert.assertTrue;
 public class ResubmissionTrackerTest {
   private static Logger logger = LoggerFactory.getLogger(ResubmissionTrackerTest.class);
 
-
   private static final String PXD000001 = "PXD000001";
   private static final String PXD000002 = "PXD000002";
   @Resource
@@ -73,7 +72,6 @@ public class ResubmissionTrackerTest {
     testData1Dates.add(Date.from(Instant.now()));
     testData1.setResubmissionDates(testData1Dates);
     resubmissionKeepService.save(testData1);
-
     Resubmission testData2 = new Resubmission();
     testData2.setProjectAccession(PXD000002);
     List<Date> testData2Dates = new ArrayList<>();
@@ -82,6 +80,7 @@ public class ResubmissionTrackerTest {
     testData2Dates.add(Date.from(past.atStartOfDay(ZoneId.systemDefault()).toInstant()));
     testData2.setResubmissionDates(testData2Dates);
     resubmissionKeepService.save(testData2);
+    logger.info("Successfully tested inserting data");
   }
 
   /**
@@ -98,6 +97,7 @@ public class ResubmissionTrackerTest {
     }
     List<Resubmission> resubmissions = resubmissionSearchService.findByIdIn(ids);
     assertNotNull(resubmissions);
+    logger.info("Successfully tested searching by document IDs.");
   }
 
   /**
@@ -110,12 +110,12 @@ public class ResubmissionTrackerTest {
     Resubmission resubmission1 = resubmissions.get(0);
     assertNotNull(resubmission1);
     assertEquals(resubmission1.getProjectAccession(), PXD000001);
-
     resubmissions = resubmissionSearchService.findByProjectAccession(PXD000002);
     assertEquals(resubmissions.size(), 1);
     Resubmission resubmission2 = resubmissions.get(0);
     assertNotNull(resubmission2);
     assertEquals(resubmission2.getProjectAccession(), PXD000002);
+    logger.info("Successfully tested searching by project accession.");
 
     List<String> idsToSerch = new ArrayList<>();
     idsToSerch.add(resubmission1.getId());
