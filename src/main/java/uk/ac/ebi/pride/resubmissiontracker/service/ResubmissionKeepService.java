@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import java.util.Collection;
 
 /**
- * Service to save resubmissions to the database.
+ * Service to save project resubmissions to the database.
  */
 @Service
 public class ResubmissionKeepService {
@@ -21,6 +21,14 @@ public class ResubmissionKeepService {
    * Default constructor.
    */
   public ResubmissionKeepService() {
+  }
+
+  /**
+   * Constructor, includes setting the resubmissionRepository.
+   * @param resubmissionRepository the resubmissionRepository to set.
+   */
+  public ResubmissionKeepService(ResubmissionRepository resubmissionRepository) {
+    this.resubmissionRepository = resubmissionRepository;
   }
 
   /**
