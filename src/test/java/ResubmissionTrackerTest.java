@@ -38,7 +38,7 @@ public class ResubmissionTrackerTest {
 
   /**
    * To start, delete any existing test data, and inserts new test data.
-   * @throws Exception
+   * @throws Exception any problems setting up test data.
    */
   @Before
   public void setUp() throws Exception {
@@ -76,9 +76,10 @@ public class ResubmissionTrackerTest {
     testData2.setProjectAccession(PXD000002);
     List<Date> testData2Dates = new ArrayList<>();
     testData2Dates.add(Date.from(Instant.now()));
+    testData2.setResubmissionDates(testData2Dates);
+    resubmissionKeepService.save(testData2);
     LocalDate past = LocalDate.of(2010, 1, 14);
     testData2Dates.add(Date.from(past.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-    testData2.setResubmissionDates(testData2Dates);
     resubmissionKeepService.save(testData2);
     logger.info("Successfully tested inserting data");
   }
@@ -116,7 +117,6 @@ public class ResubmissionTrackerTest {
     assertNotNull(resubmission2);
     assertEquals(resubmission2.getProjectAccession(), PXD000002);
     logger.info("Successfully tested searching by project accession.");
-
     List<String> idsToSerch = new ArrayList<>();
     idsToSerch.add(resubmission1.getId());
     idsToSerch.add(resubmission2.getId());
