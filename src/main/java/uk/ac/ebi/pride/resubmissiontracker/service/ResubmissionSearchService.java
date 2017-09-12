@@ -46,6 +46,10 @@ public class ResubmissionSearchService {
     return resubmissionRepository.findByProjectAccession(projectAccession);
   }
 
+  public List<Resubmission> findAll() {
+    return resubmissionRepository.findAll();
+  }
+
   /**
    * Sets new resubmissionRepository.
    *

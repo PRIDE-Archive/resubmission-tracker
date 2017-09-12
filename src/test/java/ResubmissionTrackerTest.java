@@ -121,5 +121,8 @@ public class ResubmissionTrackerTest {
     idsToSerch.add(resubmission1.getId());
     idsToSerch.add(resubmission2.getId());
     testSearchById(idsToSerch);
+    List<Resubmission> allResubmissions = resubmissionSearchService.findAll();
+    assertNotNull(allResubmissions);
+    assertEquals(allResubmissions.size(), 2);
   }
 }
